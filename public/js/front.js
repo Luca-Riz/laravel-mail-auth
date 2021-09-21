@@ -54820,7 +54820,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Luca\Boolean\mamp_public\php-laravel-odd-list\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Luca\Boolean\mamp_public\laravel-mail-auth\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
