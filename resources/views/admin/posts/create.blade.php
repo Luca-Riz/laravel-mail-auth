@@ -50,7 +50,7 @@
       {{-- immagine --}}
       <div class="mb-3">
         <label for="img" class="form-label">Immagine</label>
-        <input type="file" name="image" class="form-control
+        <input type="file" name="image" class="form-control-file
         @error('image')
         is-invalid 
         @enderror">

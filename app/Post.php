@@ -10,7 +10,8 @@ class Post extends Model
         'title',
         'slug',
         'content',
-        'category_id' //? aggiunta questa riga dopo migrations/update_posts_table
+        'category_id',
+        'cover'
     ];
 
     // crea relazione tabella categorie

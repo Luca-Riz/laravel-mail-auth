@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -48,11 +50,13 @@ class PostController extends Controller
         //validazione dei dati
         $request->validate([
             'title' => 'required|max:60',
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'nullable|image'
         ]);
 
         // prendere dati
         $data = $request->all();
+        // dd($data);
 
         // creare nuova istanza coi dati ottenuti dalla request
         $new_post = new Post();
@@ -75,6 +79,15 @@ class PostController extends Controller
         // end se c'é un duplicato
 
         $new_post->slug = $slug;
+
+        if(array_key_exists('image', $data)){
+            //? salviamo la nostra immagine e recuperiamo il path
+            $cover_path = Storage::put('covers', $data['image']);
+
+            //? salviamo nella colonna della tabella posts l'immagine con il suo percorso
+            $data['cover'] = $cover_path;
+        }
+
         $new_post->fill($data);
 
         // salvare
