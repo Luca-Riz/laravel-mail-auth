@@ -8,7 +8,7 @@
             <h5 class="card-title">{{ post.title }}</h5>
             <p>{{ formatData(post.created_at) }}</p>
             <p v-if="post.cover">
-              <img :src="post.cover" :alt="post.title">
+              <img class="w-100" :src="post.cover" :alt="post.title">
             </p>
             <p class="card-text">{{ truncate(post.content, 150) }}</p>
             <router-link :to="{name: 'post-detail', params:{ slug: post.slug }}" class="btn btn-primary">

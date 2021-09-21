@@ -49,7 +49,7 @@
       {{-- immagine --}}
       <div class="mb-3">
         @if($post->cover)
-          <img src="{{ asset('storage/' . $post->cover)}}" alt="">
+          <img class="w-100" src="{{ asset('storage/' . $post->cover)}}" alt="">
         @endif
       </div>
       <div class="mb-3">

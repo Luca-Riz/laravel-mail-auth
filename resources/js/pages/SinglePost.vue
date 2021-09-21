@@ -6,9 +6,9 @@
         <h5 class="card-title" v-if="post.category">
           {{ post.category.name }}
         </h5>
-        <p>
-          <img :src="post.cover" :alt="post.title"> <!-- img presa con percorso assoluto creato in PostController riga~46 vedi nota -->
-        </p>
+  
+        <img class="w-100" :src="post.cover" :alt="post.title"> <!-- img presa con percorso assoluto creato in PostController riga~46 vedi nota -->
+
         <p class="card-text">{{ post.content }}</p>
         <PostTag :tags="post.tags"/>
 

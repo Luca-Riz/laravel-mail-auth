@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', 'Api\PostController@index');
+Route::namespace('Api')->group(function(){
+  Route::get('/posts', 'PostController@index');
+  Route::get('/post/{slug}', 'PostController@show');
 
-Route::get('/post/{slug}', 'Api\PostController@show');
+  Route::post('/contacts', 'ContactController@store');
+});
+
+//? era scritto cosí, poi é stato raggruppato come si puó vedere qui sopra
+// Route::get('/posts', 'Api\PostController@index');
+// Route::get('/post/{slug}', 'Api\PostController@show');
