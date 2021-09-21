@@ -14,7 +14,7 @@
     @endif --}}
 
     <div class="container">
-      <form action="{{route('admin.posts.update', $post->id)}}" method="post"> {{-- method non é indispensabile --}}
+      <form action="{{route('admin.posts.update', $post->id)}}" method="post" enctype="multipart/form-data"> {{-- method non é indispensabile --}}
         @csrf
         @method('PATCH')
         <div class="mb-3">
@@ -45,6 +45,25 @@
           @endforeach
         </select>
       </div>
+
+      {{-- immagine --}}
+      <div class="mb-3">
+        @if($post->cover)
+          <img src="{{ asset('storage/' . $post->cover)}}" alt="">
+        @endif
+      </div>
+      <div class="mb-3">
+        <label for="img" class="form-label">Immagine</label>
+        <input id="img" type="file" name="image" class="form-control-file
+        @error('image')
+        is-invalid 
+        @enderror">
+        @error ('image')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+      </div>
+      {{-- fine immagine --}}
   
         <div class="mb-3">
           <label for="desc" class="form-label">Descrizione</label>
