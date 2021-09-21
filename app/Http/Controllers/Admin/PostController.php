@@ -178,7 +178,8 @@ class PostController extends Controller
         if(array_key_exists('image', $data)){
             //? salviamo la nostra immagine e recuperiamo il path
             $cover_path = Storage::put('covers', $data['image']);
-
+            
+            Storage::delete($post->cover);
             //? salviamo nella colonna della tabella posts l'immagine con il suo percorso
             $data['cover'] = $cover_path;
         }
@@ -197,8 +198,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->tags()->detach();
+        Storage::delete($post->cover);
         $post->delete();
+        $post->tags()->detach();
         
         return redirect()->route('admin.posts.index');
     }
