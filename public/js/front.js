@@ -2420,6 +2420,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Post",
   data: function data() {
@@ -2486,6 +2489,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PostTag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/PostTag */ "./resources/js/components/PostTag.vue");
+//
+//
+//
 //
 //
 //
@@ -38513,6 +38519,14 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.formatData(post.created_at)))]),
                   _vm._v(" "),
+                  post.cover
+                    ? _c("p", [
+                        _c("img", {
+                          attrs: { src: post.cover, alt: post.title }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("p", { staticClass: "card-text" }, [
                     _vm._v(_vm._s(_vm.truncate(post.content, 150)))
                   ]),
@@ -38655,6 +38669,10 @@ var render = function() {
                 )
               ])
             : _vm._e(),
+          _vm._v(" "),
+          _c("p", [
+            _c("img", { attrs: { src: _vm.post.cover, alt: _vm.post.title } })
+          ]),
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [
             _vm._v(_vm._s(_vm.post.content))

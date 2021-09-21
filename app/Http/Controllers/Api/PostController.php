@@ -26,6 +26,13 @@ class PostController extends Controller
 
         //? paginazione
         $posts = Post::paginate(4);
+
+        $posts->each(function($post) {
+            if($post->cover){  //se c'é l'url aggiungilo
+                $post->cover = url('storage/' .$post->cover);
+            }
+        });
+
         return response()->json([
             'success' => true,
             'results' => $posts
@@ -42,7 +49,9 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)->with(['category','tags'])->first();
         if($post){
-
+            if($post->cover){ //se c'é il post
+                $post->cover = url('storage/' .$post->cover); //creo l'url percorso assoluto
+            }
             return response()->json([
                 'success' => true,
                 'results' => $post
