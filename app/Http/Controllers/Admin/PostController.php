@@ -143,7 +143,8 @@ class PostController extends Controller
         //validazione dei dati
         $request->validate([
             'title' => 'required|max:60',
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'nullable|image'
         ]);
 
         $data = $request->all();
@@ -172,6 +173,14 @@ class PostController extends Controller
 
             //in ogni caso assegniamo allo slug il valore ottenuto
             $data['slug'] = $slug;
+        }
+
+        if(array_key_exists('image', $data)){
+            //? salviamo la nostra immagine e recuperiamo il path
+            $cover_path = Storage::put('covers', $data['image']);
+
+            //? salviamo nella colonna della tabella posts l'immagine con il suo percorso
+            $data['cover'] = $cover_path;
         }
 
         $post->update($data);
