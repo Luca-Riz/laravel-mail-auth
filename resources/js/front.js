@@ -1,18 +1,24 @@
-require('./bootstrap');
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
 
-window.Vue = require('vue');
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+ require('./bootstrap');
 
-// axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+ window.Vue = require('vue');
+ 
+ window.axios = require('axios');
+ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+ 
+//  axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+ 
+ 
+ import App from './views/App';
+ import router from './router';
 
-//import Vue from 'vue';
-import App from './views/App';
-import router from './router';
-import axios from 'axios';
-
-const app = new Vue({
-  el: '#root',
-  render: h => h(App),
-  router
-});
+ const app = new Vue({
+     el: '#root',
+     render: h => h(App),
+     router
+ });

@@ -27,7 +27,7 @@ class ContactController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
-
+        
         $new_lead = new Lead();
         $new_lead->fill($data);
 
@@ -35,10 +35,7 @@ class ContactController extends Controller
 
         Mail::to('info@boolpress.com')->send(new SendNewMail($new_lead));
 
+        return response()->json( ['success' => true] );
 
-
-
-
-        
     }
 }

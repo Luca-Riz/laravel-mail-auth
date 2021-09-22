@@ -2364,12 +2364,14 @@ __webpack_require__.r(__webpack_exports__);
   name: "Contact",
   data: function data() {
     return {
-      name: '',
-      email: '',
-      message: '',
       errors: {},
       sending: false,
-      success: false
+      success: false,
+      fields: {
+        name: '',
+        email: '',
+        message: ''
+      }
     };
   },
   methods: {
@@ -2378,19 +2380,17 @@ __webpack_require__.r(__webpack_exports__);
 
       this.sending = true;
       this.success = false;
-      axios.post('/api/contacts', {
-        'name': this.name,
-        'email': this.email,
-        'message': this.message
-      }).then(function (response) {
+      axios.post('/api/contacts', this.fields).then(function (response) {
         if (!response.data.success) {
-          _this.errors = response.data.errors; //    console.log(this.errors);
-
+          _this.errors = response.data.errors || {};
           _this.success = false;
+          console.log(_this.errors);
         } else {
-          _this.success = true, // console.log(response);
+          _this.success = true;
           _this.sending = false;
-          _this.name = '', _this.email = '', _this.message = '';
+          _this.fields.name = '';
+          _this.fields.email = '';
+          _this.fields.message = '';
         }
       })["catch"](function (error) {
         console.log(error);
@@ -38530,19 +38530,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.name,
-                      expression: "name"
+                      value: _vm.fields.name,
+                      expression: "fields.name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", name: "name", id: "nome" },
-                  domProps: { value: _vm.name },
+                  domProps: { value: _vm.fields.name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.name = $event.target.value
+                      _vm.$set(_vm.fields, "name", $event.target.value)
                     }
                   }
                 }),
@@ -38575,19 +38575,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.email,
-                      expression: "email"
+                      value: _vm.fields.email,
+                      expression: "fields.email"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "email", id: "email", name: "email" },
-                  domProps: { value: _vm.email },
+                  domProps: { value: _vm.fields.email },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.email = $event.target.value
+                      _vm.$set(_vm.fields, "email", $event.target.value)
                     }
                   }
                 }),
@@ -38620,19 +38620,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.message,
-                      expression: "message"
+                      value: _vm.fields.message,
+                      expression: "fields.message"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { name: "message", id: "msg", cols: "30", rows: "10" },
-                  domProps: { value: _vm.message },
+                  domProps: { value: _vm.fields.message },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.message = $event.target.value
+                      _vm.$set(_vm.fields, "message", $event.target.value)
                     }
                   }
                 }),
@@ -54566,15 +54566,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/App */ "./resources/js/views/App.vue");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
-//import Vue from 'vue';
-
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; //  axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 
 
 
